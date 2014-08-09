@@ -15,8 +15,100 @@ set incsearch " インクリメンタルサーチを行う
 set hlsearch " 検索結果をハイライト表示
 set ttymouse=xterm2 " xtermとscreen対応
 set showcmd " コマンドを画面最下部に表示する
-set autoindent
-set tabstop=2
+set backspace=indent,eol,start " Backspaceキーの影響範囲に制限を設けない
+set cursorline     " カーソル行の背景色を変える
+set laststatus=2   " ステータス行を常に表示
+
+set cmdheight=1    " メッセージ表示欄を1行確保
+
+" タブ/インデントの設定
+
+set expandtab     " タブ入力を複数の空白入力に置き換える
+set tabstop=2     " 画面上でタブ文字が占める幅
+set shiftwidth=2  " 自動インデントでずれる幅
+set softtabstop=2 " 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
+set autoindent    " 改行時に前の行のインデントを継続する
+set smartindent   " 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
+
+set wildmenu wildmode=list:longest,full
+
+noremap <silent> fm :Unite file_mru<CR>
+" vimfilerの起動
+nnoremap <silent> vf :VimFiler<CR>
+
+"---------------------------
+" Start Neobundle Settings.
+"---------------------------
+
+" bundleで管理するディレクトリを指定
+if has('vim_starting')
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+" Required:
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/vimproc.vim', {
+      \ 'build' : {
+      \     'windows' : 'tools\\update-dll-mingw',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'Shougo/neocomplcache.vim'
+NeoBundle 'itchyny/landscape.vim'
+NeoBundle 'itchyny/lightline.vim'
+
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" 未インストールのプラグインがある場合、インストールするかどうかを尋ねてくれるようにする設定
+" 毎回聞かれると邪魔な場合もあるので、この設定は任意です。
+NeoBundleCheck
+
+"-------------------------
+" End Neobundle Settings.
+"-------------------------
+
+"-------------------------------------------------
+" ユーザー定義関数
+"-------------------------------------------------
+ 
+ " Paste Mode
+ " {{{
+ let paste_mode = 0 " 0 = normal, 1 = paste
+ 
+ function! Paste_on_off()
+ if g:paste_mode == 0
+ set paste
+ let g:paste_mode = 1
+ else
+ set nopaste
+ let g:paste_mode = 0
+ endif
+ return
+ endfunc
+ " }}}
+
+
+"-------------------------------------------------
+" Function ユーザー定義関数
+"-------------------------------------------------
+ 
+ " Paste Mode <F10>
+ nnoremap <silent> <F10> :call Paste_on_off()<CR>
+ set pastetoggle=<F10>
 
 colorscheme molokai
 let g:molokai_original = 1
