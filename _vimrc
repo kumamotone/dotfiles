@@ -34,6 +34,8 @@ set wildmenu wildmode=list:longest,full
 noremap <silent> fm :Unite file_mru<CR>
 " vimfilerの起動
 nnoremap <silent> vf :VimFiler<CR>
+nnoremap <silent> vs :vsplit<CR>
+
 
 "---------------------------
 " Start Neobundle Settings.
@@ -64,7 +66,6 @@ NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'Shougo/neocomplcache.vim'
-NeoBundle 'itchyny/landscape.vim'
 NeoBundle 'itchyny/lightline.vim'
 
 call neobundle#end()
