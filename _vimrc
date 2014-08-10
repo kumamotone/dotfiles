@@ -34,7 +34,7 @@ set wildmenu wildmode=list:longest,full
 noremap <silent> fm :Unite file_mru<CR>
 " vimfilerの起動
 nnoremap <silent> vf :VimFiler<CR>
-nnoremap <silent> vs :vsplit<CR>
+nnoremap <silent> vs :vsplit<CR> <C-w>l :VimFiler<CR>
 
 
 "---------------------------
@@ -138,20 +138,26 @@ else
     set clipboard& clipboard+=unnamed,autoselect
 endif 
 
+" スペースw,q,Qで保存，終了処理
 nnoremap <Space>w  :<C-u>w<CR>
 nnoremap <Space>q  :<C-u>q<CR>
 nnoremap <Space>Q  :<C-u>q!<CR>
 
+" スペースh,lで文頭文末移動
 nnoremap <Space>h  ^
 nnoremap <Space>l  $
 
+" スペースo,Oで空白行の挿入
 nnoremap <Space>o  :<C-u>for i in range(v:count1) \| call append(line('.'), '') \| endfor<CR>
 nnoremap <Space>O  :<C-u>for i in range(v:count1) \| call append(line('.')-1, '') \| endfor<CR>
 
+" ESC ESC打鍵で検索用ハイライトの無効化
 nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR>
 
+" jkと素早く打鍵すると入力モードを抜ける
 inoremap jk  <Esc>
 
+" コマンドラインモードでの移動をEmacsライクなキーバインドに
 cnoremap <C-f>  <Right>
 cnoremap <C-b>  <Left>
 cnoremap <C-a>  <C-b>
@@ -161,7 +167,6 @@ cnoremap <C-v> <C-f>a
 
 nnoremap <Space>/  *<C-o>
 nnoremap g<Space>/ g*<C-o>
-
 
 " なんか公式推奨のlightlineの設定
 
