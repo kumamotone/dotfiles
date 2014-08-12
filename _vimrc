@@ -41,110 +41,10 @@ set wildmenu wildmode=list:longest,full
 noremap <silent> fm :Unite file_mru<CR>
 " vimfilerの起動
 nnoremap <silent> vf :VimFiler<CR>
-nnoremap <silent> vs :vsplit"<CR><C-w>l
-
-augroup vimrcEx
-  au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
-  \ exe "normal g`\"" | endif
-augroup END
-
-
-set completeopt=menuone
-for k in split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_",'\zs')
-  exec "imap " . k . " " . k . "<C-N><C-P>"
-endfor
-
-imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
-
-"---------------------------
-" Start Neobundle Settings.
-"---------------------------
-
-"" bundleで管理するディレクトリを指定
-"if has('vim_starting')
-"    set runtimepath+=~/.vim/bundle/neobundle.vim/
-"endif
-"
-"" Required:
-"call neobundle#rc(expand('~/.vim/bundle/'))
-"
-"" Let NeoBundle manage NeoBundle
-"" Required:
-"NeoBundleFetch 'Shougo/neobundle.vim'
-"NeoBundle 'Shougo/vimproc.vim', {
-"      \ 'build' : {
-"      \     'windows' : 'tools\\update-dll-mingw',
-"      \     'cygwin' : 'make -f make_cygwin.mak',
-"      \     'mac' : 'make -f make_mac.mak',
-"      \     'unix' : 'make -f make_unix.mak',
-"      \    },
-"      \ }
-"NeoBundle 'Shougo/unite.vim'
-"NeoBundle 'Shougo/vimfiler.vim'
-"NeoBundle 'Shougo/neomru.vim'
-"NeoBundle 'thinca/vim-quickrun'
-"NeoBundle 'mattn/emmet-vim'
-"NeoBundle 'Shougo/neocomplcache.vim'
-"NeoBundle 'itchyny/lightline.vim'
-"
-"call neobundle#end()
-"
-"" Required:
-"filetype plugin indent on
-"
-"" 未インストールのプラグインがある場合、インストールするかどうかを尋ねてくれるようにする設定
-"" 毎回聞かれると邪魔な場合もあるので、この設定は任意です。
-"NeoBundleCheck
-"
-"-------------------------
-" End Neobundle Settings.
-"-------------------------
-
-"-------------------------------------------------
-" ユーザー定義関数
-"-------------------------------------------------
- 
- " Paste Mode
- " {{{
- let paste_mode = 0 " 0 = normal, 1 = paste
- 
- function! Paste_on_off()
- if g:paste_mode == 0
- set paste
- let g:paste_mode = 1
- else
- set nopaste
- let g:paste_mode = 0
- endif
- return
- endfunc
- " }}}
-
-
-"-------------------------------------------------
-" Function ユーザー定義関数
-"-------------------------------------------------
- 
- " Paste Mode <F10>
- nnoremap <silent> <F10> :call Paste_on_off()<CR>
- set pastetoggle=<F10>
-
-colorscheme molokai
-let g:molokai_original = 1
-let g:rehash256 = 1
-set background=dark
-
-"molokaiを使うときは
-"ホームディレクトリ配下には~/.vim/colors/を作成して
-" # mkdir ~/.vim
-" # cd ~/.vim
-" # mkdir colors
-"githubからとってくる
-" # git clone https://github.com/tomasr/molokai
-" # mv molokai/colors/molokai.vim ~/.vim/colors/
+nnoremap <silent> vs :vsplit"<CR><C-w>l:VimFiler<CR>
 
 " Ctrl + hjkl でウィンドウ間を移動
-noremap <C-h> <C-w>
+noremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
 " /{pattern}の入力中は「/」をタイプすると自動で「\/」が、
@@ -198,6 +98,107 @@ vnoremap <expr> N <SID>search_forward_p() ? 'Nzv' : 'nzv'
 inoremap {<Enter> {}<Left><CR><BS><ESC><S-o>
 inoremap [<Enter> []<Left><CR><BS><ESC><S-o>
 inoremap (<Enter> ()<Left><CR><BS><ESC><S-o>
+
+
+augroup vimrcEx
+  au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
+  \ exe "normal g`\"" | endif
+augroup END
+
+
+set completeopt=menuone
+for k in split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_",'\zs')
+  exec "imap " . k . " " . k . "<C-N><C-P>"
+endfor
+
+imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
+
+"---------------------------
+" Start Neobundle Settings.
+"---------------------------
+
+" bundleで管理するディレクトリを指定
+if has('vim_starting')
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+" Required:
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/vimproc.vim', {
+      \ 'build' : {
+      \     'windows' : 'tools\\update-dll-mingw',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'Shougo/neocomplcache.vim'
+NeoBundle 'itchyny/lightline.vim'
+
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" 未インストールのプラグインがある場合、インストールするかどうかを尋ねてくれるようにする設定
+" 毎回聞かれると邪魔な場合もあるので、この設定は任意です。
+NeoBundleCheck
+
+"-------------------------
+" End Neobundle Settings.
+"-------------------------
+
+"-------------------------------------------------
+" ユーザー定義関数
+"-------------------------------------------------
+ 
+ " Paste Mode
+ " {{{
+ let paste_mode = 0 " 0 = normal, 1 = paste
+ 
+ function! Paste_on_off()
+ if g:paste_mode == 0
+ set paste
+ let g:paste_mode = 1
+ else
+ set nopaste
+ let g:paste_mode = 0
+ endif
+ return
+ endfunc
+ " }}}
+
+
+"-------------------------------------------------
+" Function ユーザー定義関数
+"-------------------------------------------------
+ 
+ " Paste Mode <F10>
+ nnoremap <silent> <F10> :call Paste_on_off()<CR>
+ set pastetoggle=<F10>
+
+colorscheme molokai
+let g:molokai_original = 1
+let g:rehash256 = 1
+set background=dark
+
+"molokaiを使うときは
+"ホームディレクトリ配下には~/.vim/colors/を作成して
+" # mkdir ~/.vim
+" # cd ~/.vim
+" # mkdir colors
+"githubからとってくる
+" # git clone https://github.com/tomasr/molokai
+" # mv molokai/colors/molokai.vim ~/.vim/colors/
 
 
 function! s:search_forward_p()
