@@ -1,8 +1,14 @@
-set nocompatible "vi互換ではなくVimのデフォルト設定にする
+" めちゃんこ参考にさせていただいた↓
+" ぼくのかんがえたさいしょうのvimrc - derisの日記
+"  http://deris.hatenablog.jp/entry/2014/05/20/235807
+" おすすめの.vimrc設定と.zshrc設定 - 株式会社参謀本部の社長ブログ
+"  http://www.geek.sc/archives/977
+" Ragiko氏のvimrc
+"  https://github.com/ragiko/vimrc
 
 syntax on "シンタックスハイライト
+set nocompatible "vi互換ではなくVimのデフォルト設定にする
 set encoding=utf8 "エンコード
-set list "不可視文字を表示
 set number "行番号を表示
 set ruler "右下位に表示される行・列の番号を表示する
 set clipboard+=unnamed
@@ -16,19 +22,15 @@ set hlsearch " 検索結果をハイライト表示
 set ttymouse=xterm2 " xtermとscreen対応
 set showcmd " コマンドを画面最下部に表示する
 set backspace=indent,eol,start " Backspaceキーの影響範囲に制限を設けない
-set laststatus=2   " ステータス行を常に表示
-set t_Co=256
-set cmdheight=1    " メッセージ表示欄を1行確保
-set whichwrap=h,l
-set nowrapscan
-
-
-nnoremap <silent> tt  :<C-u>tabe<CR>
-nnoremap <C-p>  gT
-nnoremap <C-n>  gt
+set laststatus=2 " ステータス行を常に表示
+set t_Co=256 " lightline使うときになんとなく書いとけって書いてあったから書いてる
+set cmdheight=1 " メッセージ表示欄を1行確保
+set whichwrap=h,l "左右のカーソル移動において、行を跨いで移動出来る様にするオプション
+set wrapscan " 検索がファイル末尾まで進んだら、ファイル先頭から再び検索する。
+set noswapfile "スワップファイルは使わない
+set listchars=tab:>\ ,extends:<
 
 " タブ/インデントの設定
-
 set expandtab     " タブ入力を複数の空白入力に置き換える
 set tabstop=2     " 画面上でタブ文字が占める幅
 set shiftwidth=2  " 自動インデントでずれる幅
@@ -39,11 +41,11 @@ set smartindent   " 改行時に入力された行の末尾に合わせて次の
 set wildmenu wildmode=list:longest,full
 
 noremap <silent> fm :Unite file_mru<CR>
-" vimfilerの起動
+" viwmfilerの起動
 nnoremap <silent> vf :VimFiler<CR>
 nnoremap <silent> vs :vsplit"<CR><C-w>l:VimFiler<CR>
 
-" Ctrl + hjkl でウィンドウ間を移動
+" Ctrl + hl でウィンドウ間を移動
 noremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
@@ -86,25 +88,38 @@ cnoremap <C-e>  <C-e>
 cnoremap <C-u> <C-e><C-u>
 cnoremap <C-v> <C-f>a
 
-nnoremap <Space>/  *<C-o>
-nnoremap g<Space>/ g*<C-o>
+" /で検索した場合と、?で検索した場合で、
+" nとNで移動する方向が異なるのが不便
+" このため、/と?のどちらで検索した場合でも、nで前方検索
+" Nで後方検索するよう設定
 
 nnoremap <expr> n <SID>search_forward_p() ? 'nzv' : 'Nzv'
 nnoremap <expr> N <SID>search_forward_p() ? 'Nzv' : 'nzv'
 vnoremap <expr> n <SID>search_forward_p() ? 'nzv' : 'Nzv'
 vnoremap <expr> N <SID>search_forward_p() ? 'Nzv' : 'nzv'
 
+function! s:search_forward_p()
+  return exists('v:searchforward') ? v:searchforward : 1
+endfunction
+
+" 色設定　黒背景にmolokai
+colorscheme molokai
+let g:molokai_original = 1
+let g:rehash256 = 1
+set background=dark
+
 " Vimで括弧の補完→改行してインデント
 inoremap {<Enter> {}<Left><CR><BS><ESC><S-o>
 inoremap [<Enter> []<Left><CR><BS><ESC><S-o>
 inoremap (<Enter> ()<Left><CR><BS><ESC><S-o>
 
+" Vimで入力補完を常にオンにするvimrc
+" http://io-fia.blogspot.jp/2012/11/vimvimrc.html
 
 augroup vimrcEx
   au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
   \ exe "normal g`\"" | endif
 augroup END
-
 
 set completeopt=menuone
 for k in split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_",'\zs')
@@ -136,13 +151,16 @@ NeoBundle 'Shougo/vimproc.vim', {
       \     'unix' : 'make -f make_unix.mak',
       \    },
       \ }
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'Shougo/neocomplcache.vim'
-NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'Shougo/unite.vim' " ファイルオープンを便利に(VimFiler用)
+NeoBundle 'Shougo/vimfiler.vim' " ファイラ
+NeoBundle 'Shougo/neomru.vim' " Unite.vimで最近使ったファイルを表示できるようにする(VimFiler用)
+NeoBundle 'thinca/vim-quickrun' " :QuickRun でクイック実行
+" NeoBundle 'mattn/emmet-vim' " HTMLとかのタグを閉じたりできるプラグインっぽいけど今のところ使わない 
+NeoBundle 'Shougo/neocomplcache.vim' "入力補完機能を提供する Vim のプラグイン
+NeoBundle 'itchyny/lightline.vim' " Statuslineを豪華に
+NeoBundle 'Yggdroot/indentLine' " インデントを見やすく 
+NeoBundle 'tpope/vim-endwise' " Ruby向けにendを自動挿入してくれる 
+NeoBundle 'tomtom/tcomment_vim' " コメントON/OFFを手軽に実行
 
 call neobundle#end()
 
@@ -157,56 +175,52 @@ NeoBundleCheck
 " End Neobundle Settings.
 "-------------------------
 
-"-------------------------------------------------
-" ユーザー定義関数
-"-------------------------------------------------
- 
- " Paste Mode
- " {{{
- let paste_mode = 0 " 0 = normal, 1 = paste
- 
- function! Paste_on_off()
- if g:paste_mode == 0
- set paste
- let g:paste_mode = 1
- else
- set nopaste
- let g:paste_mode = 0
- endif
- return
- endfunc
- " }}}
-
-
-"-------------------------------------------------
-" Function ユーザー定義関数
-"-------------------------------------------------
- 
- " Paste Mode <F10>
- nnoremap <silent> <F10> :call Paste_on_off()<CR>
- set pastetoggle=<F10>
-
-colorscheme molokai
-let g:molokai_original = 1
-let g:rehash256 = 1
-set background=dark
-
-"molokaiを使うときは
-"ホームディレクトリ配下には~/.vim/colors/を作成して
-" # mkdir ~/.vim
-" # cd ~/.vim
-" # mkdir colors
-"githubからとってくる
-" # git clone https://github.com/tomasr/molokai
-" # mv molokai/colors/molokai.vim ~/.vim/colors/
-
-
-function! s:search_forward_p()
-  return exists('v:searchforward') ? v:searchforward : 1
+" http://inari.hatenablog.com/entry/2014/05/05/231307
+""""""""""""""""""""""""""""""
+" 全角スペースの表示
+""""""""""""""""""""""""""""""
+function! ZenkakuSpace()
+    highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
 endfunction
 
+if has('syntax')
+    augroup ZenkakuSpace
+        autocmd!
+        autocmd ColorScheme * call ZenkakuSpace()
+        autocmd VimEnter,WinEnter,BufRead * let w:m1=matchadd('ZenkakuSpace', '　')
+    augroup END
+    call ZenkakuSpace()
+endif
+""""""""""""""""""""""""""""""
 
-" なんか公式推奨のlightlineの設定
+" ペーストモード　vimはコンソール外から貼り付けとかしてくるときに
+" インデントがおかしくなるみたいなのでF10で切り替えられるようにしておく
+
+" Paste Mode
+" {{{
+let paste_mode = 0 " 0 = normal, 1 = paste
+
+function! Paste_on_off()
+  if g:paste_mode == 0
+    set paste
+    let g:paste_mode = 1
+  else
+    set nopaste
+    let g:paste_mode = 0
+  endif
+  return
+endfunc
+" }}}
+
+" Paste Mode <F10>
+nnoremap <silent> <F10> :call Paste_on_off()<CR>
+set pastetoggle=<F10>
+
+"-----------------------------------------------------------------------------
+"
+" ここからよく意味はわかってないけど公式推奨のlightlineの設定
+"
+"-----------------------------------------------------------------------------
 
 let g:lightline = {
         \ 'colorscheme': 'solarized',
@@ -269,5 +283,8 @@ function! MyMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
-" http://deris.hatenablog.jp/entry/2014/05/20/235807
-" http://www.geek.sc/archives/977
+"-----------------------------------------------------------------------------
+"
+" よく意味はわかってないけど公式推奨のlightlineの設定 ここまで
+"
+"-----------------------------------------------------------------------------
