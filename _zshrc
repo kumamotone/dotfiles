@@ -99,11 +99,11 @@ fi
 
 
 # Acroread の Completion が遅い問題を回避
-_acroread_version='7.0.9'
-alias close='screen -D'
-cd ~
-export LANG=en_US.UTF-8
-preexec () {
-        echo -ne "\ek${1%% *}\e\\"
-}
+#_acroread_version='7.0.9'
+#alias close='screen -D'
+#cd ~
+#export LANG=en_US.UTF-8
+#preexec () {
+#        echo -ne "\ek${1%% *}\e\\"
+#}
 
