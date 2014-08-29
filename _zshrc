@@ -56,7 +56,7 @@ autoload -U colors     ; colors
 setopt auto_pushd
 ## 同じディレクトリを pushd しない
 setopt pushd_ignore_dups
- プロンプトテーマを表示するコマンド
+# プロンプトテーマを表示するコマンド
 # prompt -l
 # 基本のプロンプト
 PROMPT="%{$reset_color%}$ "
