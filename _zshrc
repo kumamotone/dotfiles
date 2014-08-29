@@ -1,8 +1,6 @@
-## <エスケープシーケンス>
 # .zshrc をコンパイルして .zshrc.zwc を生成するコマンド
 zcompile .zshrc
- 
-##========================================================##
+#========================================================##
 ##================= リストの色つけの設定 =================##
 ##========================================================##
 # ls, #dir, vdir の設定
@@ -34,7 +32,14 @@ zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:descriptions' format '%F{yellow}Completing %B%d%b%f'$DEFAULT
 # マッチ種別を別々に表示
 zstyle ':completion:*' group-name ''
-
+##========================================================##
+##==================== 予測補完の設定 ====================##
+##========================================================##
+autoload -U predict-on       # 履歴による予測入力 (man zshcontrib)
+zle -N predict-on
+zle -N predict-off
+bindkey '^xp'  predict-on    # Cttl+x p で予測オン
+bindkey '^x^p' predict-off   # Cttl+x Ctrl+p で予測オフ
 ##========================================================##
 ##====================== 履歴の設定 ======================##
 ##========================================================##
@@ -42,9 +47,7 @@ HISTFILE=$HOME/.zsh_history  # 履歴をファイルに保存する
 HISTSIZE=100000              # メモリ内の履歴の数
 SAVEHIST=100000              # 保存される履歴の数
 setopt extended_history      # 履歴ファイルに開始時刻と経過時間を記録
-setopt share_history         # 履歴の共有
-#
-##========================================================##
+#========================================================##
 ##=================== プロンプトの設定 ===================##
 ##========================================================##
 autoload -U promptinit ; promptinit
@@ -53,8 +56,7 @@ autoload -U colors     ; colors
 setopt auto_pushd
 ## 同じディレクトリを pushd しない
 setopt pushd_ignore_dups
-
-# プロンプトテーマを表示するコマンド
+ プロンプトテーマを表示するコマンド
 # prompt -l
 # 基本のプロンプト
 PROMPT="%{$reset_color%}$ "
@@ -63,6 +65,18 @@ PROMPT="%{$reset_color%}[%{$fg[red]%}%B%~%b%{$reset_color%}]$PROMPT"
 # 名前@マシン名 プロンプト
 PROMPT="%{$reset_color%}%{$fg[green]%}$USER%{$reset_color%}@%{$fg[cyan]%}%m%{$reset_color%}$PROMPT"
 RPROMPT="%{$fg[green]%}[%*]%{$reset_color%}"
+##========================================================##
+##================ ディレクトリ移動の設定 ================##
+##========================================================##
+setopt auto_cd               # ディレクトリのみで移動
+setopt auto_pushd            # 普通に cd するときにもディレクトリスタックにそのディレクトリを入れる
+setopt pushd_ignore_dups     # ディレクトリスタックに重複する物は古い方を削除
+setopt pushd_to_home         # pushd 引数ナシ == pushd $HOME
+setopt pushd_silent          # pushd,popdの度にディレクトリスタックの中身を表示しない
+# pop command
+alias pd='popd'
+alias gd='dirs -v; echo -n "select number: ";
+read newdir; cd +"$newdir" '
 
 ##========================================================##
 ##====================== 雑多な設定 ======================##
@@ -106,4 +120,3 @@ fi
 #preexec () {
 #        echo -ne "\ek${1%% *}\e\\"
 #}
-
