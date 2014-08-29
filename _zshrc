@@ -120,3 +120,10 @@ fi
 #preexec () {
 #        echo -ne "\ek${1%% *}\e\\"
 #}
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+screen -d -R
+
+alias nqcp='sudo cp ~/bot/tkbmstest2.nq /usr/share/virtuoso-opensource-6.1/vad'
