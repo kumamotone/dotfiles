@@ -1,3 +1,10 @@
+# Gehirn RS2という格安で使える技術者向けレンタルサーバを使って，zshに目覚め，
+# この.zshrcはGehirn RS2にプリインストールされている.zshrcをベースに書いています．
+# とても良いサービスだと思うので，興味のある方はぜひ使ってみてください．
+# http://www.gehirn.jp/rs2.html
+# auto-fuはここを参考にして動くようになったヨ
+# http://succi.jp/blog/?p=901&utm_source=dlvr.it&utm_medium=twitter&utm_campaign=post-901
+
 # .zshrc をコンパイルして .zshrc.zwc を生成するコマンド
 zcompile .zshrc
 #========================================================##
