@@ -157,6 +157,12 @@ imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
  NeoBundle 'Shougo/unite.vim' " ファイルオープンを便利に(VimFiler用)
  NeoBundle 'Shougo/vimfiler.vim' " ファイラ
  NeoBundle 'Shougo/neomru.vim' " Unite.vimで最近使ったファイルを表示できるようにする(VimFiler用)
+ NeoBundle 'thinca/vim-quickrun' " :QuickRun でクイック実行
+NeoBundle 'Shougo/neocomplcache.vim' "入力補完機能を提供する Vim のプラグイン
+NeoBundle 'itchyny/lightline.vim' " Statuslineを豪華に
+NeoBundle 'Yggdroot/indentLine' " インデントを見やすく 
+NeoBundle 'tpope/vim-endwise' " Ruby向けにendを自動挿入してくれる 
+NeoBundle 'tomtom/tcomment_vim' " コメントON/OFFを手軽に実行
 
  " My Bundles here:
  " Refer to |:NeoBundle-examples|.
