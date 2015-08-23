@@ -135,44 +135,37 @@ imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
 " Start Neobundle Settings.
 "---------------------------
 
-" bundleで管理するディレクトリを指定
-if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
+" Note: Skip initialization for vim-tiny or vim-small.
+ if 0 | endif
 
-" Required:
-call neobundle#rc(expand('~/.vim/bundle/'))
+ if has('vim_starting')
+   if &compatible
+     set nocompatible               " Be iMproved
+   endif
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc.vim', {
-      \ 'build' : {
-      \     'windows' : 'tools\\update-dll-mingw',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
-NeoBundle 'Shougo/unite.vim' " ファイルオープンを便利に(VimFiler用)
-NeoBundle 'Shougo/vimfiler.vim' " ファイラ
-NeoBundle 'Shougo/neomru.vim' " Unite.vimで最近使ったファイルを表示できるようにする(VimFiler用)
-NeoBundle 'thinca/vim-quickrun' " :QuickRun でクイック実行
-" NeoBundle 'mattn/emmet-vim' " HTMLとかのタグを閉じたりできるプラグインっぽいけど今のところ使わない 
-NeoBundle 'Shougo/neocomplcache.vim' "入力補完機能を提供する Vim のプラグイン
-NeoBundle 'itchyny/lightline.vim' " Statuslineを豪華に
-NeoBundle 'Yggdroot/indentLine' " インデントを見やすく 
-NeoBundle 'tpope/vim-endwise' " Ruby向けにendを自動挿入してくれる 
-NeoBundle 'tomtom/tcomment_vim' " コメントON/OFFを手軽に実行
+   " Required:
+   set runtimepath+=~/.vim/bundle/neobundle.vim/
+ endif
 
-call neobundle#end()
+ " Required:
+ call neobundle#begin(expand('~/.vim/bundle/'))
 
-" Required:
-filetype plugin indent on
+ " Let NeoBundle manage NeoBundle
+ " Required:
+ NeoBundleFetch 'Shougo/neobundle.vim'
 
-" 未インストールのプラグインがある場合、インストールするかどうかを尋ねてくれるようにする設定
-" 毎回聞かれると邪魔な場合もあるので、この設定は任意です。
-NeoBundleCheck
+ " My Bundles here:
+ " Refer to |:NeoBundle-examples|.
+ " Note: You don't set neobundle setting in .gvimrc!
+
+ call neobundle#end()
+
+ " Required:
+ filetype plugin indent on
+
+ " If there are uninstalled bundles found on startup,
+ " this will conveniently prompt you to install them.
+ NeoBundleCheck
 
 "-------------------------
 " End Neobundle Settings.
