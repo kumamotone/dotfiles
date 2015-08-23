@@ -44,7 +44,7 @@ set wildmenu wildmode=list:longest,full
 noremap <silent> fm :Unite file_mru<CR>
 " viwmfilerの起動
 nnoremap <silent> vf :VimFiler<CR>
-nnoremap <silent> vs :vsplit"<CR><C-w>l:VimFiler<CR>
+nnoremap <silent> vs :vsplit"<CR>:VimFiler<CR>
 
 " Ctrl + hl でウィンドウ間を移動
 noremap <C-h> <C-w>h
@@ -153,6 +153,10 @@ imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
  " Let NeoBundle manage NeoBundle
  " Required:
  NeoBundleFetch 'Shougo/neobundle.vim'
+
+ NeoBundle 'Shougo/unite.vim' " ファイルオープンを便利に(VimFiler用)
+ NeoBundle 'Shougo/vimfiler.vim' " ファイラ
+ NeoBundle 'Shougo/neomru.vim' " Unite.vimで最近使ったファイルを表示できるようにする(VimFiler用)
 
  " My Bundles here:
  " Refer to |:NeoBundle-examples|.
