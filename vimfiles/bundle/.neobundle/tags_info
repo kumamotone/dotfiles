@@ -5,6 +5,7 @@ neocomplcache.vim
 neomru.vim
 tcomment_vim
 unite.vim
+vim-bracketed-paste
 vim-endwise
 vim-quickrun
 vimfiler.vim

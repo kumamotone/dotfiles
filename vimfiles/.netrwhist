@@ -1,7 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_cnt =9
 let g:netrw_dirhist_1='/home/kumamoto/.vim'
 let g:netrw_dirhist_2='/home/kumamoto/github'
 let g:netrw_dirhist_3='/home/kumamoto/zen/trunk/zen/tools/chscan'
 let g:netrw_dirhist_4='/home/kumamoto/dotfiles/vimfiles/molokai'
 let g:netrw_dirhist_5='/home/kumamoto/tutorialexpress/firstapp/routes'
+let g:netrw_dirhist_6='/Users/kumamoto/dotfiles'
+let g:netrw_dirhist_7='/Users/kumamoto'
+let g:netrw_dirhist_8='/Users/kumamoto/dotfiles'
+let g:netrw_dirhist_9='/Users/kumamoto'

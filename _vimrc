@@ -163,7 +163,7 @@ NeoBundle 'itchyny/lightline.vim' " Statuslineを豪華に
 NeoBundle 'Yggdroot/indentLine' " インデントを見やすく 
 NeoBundle 'tpope/vim-endwise' " Ruby向けにendを自動挿入してくれる 
 NeoBundle 'tomtom/tcomment_vim' " コメントON/OFFを手軽に実行
-
+NeoBundle 'ConradIrwin/vim-bracketed-paste' " paste mode 自動化
  " My Bundles here:
  " Refer to |:NeoBundle-examples|.
  " Note: You don't set neobundle setting in .gvimrc!
@@ -294,3 +294,11 @@ endfunction
 " よく意味はわかってないけど公式推奨のlightlineの設定 ここまで
 "
 "-----------------------------------------------------------------------------
+
+" Powerline
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+"set laststatus=2
+"set showtabline=2
+"set noshowmode

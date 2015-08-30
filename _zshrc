@@ -12,12 +12,17 @@ zcompile .zshrc
 ##========================================================##
 # ls, #dir, vdir の設定
 alias s='screen -U'
-alias ll='ls -rtl'
+# alias ll='ls -rtl'
+# For Mac
+alias ll='ls -rtlG'
 alias la='ls -rtal'
-alias ls='ls --color'
+# alias ls='ls --color'
+alias ls='ls -G'
+# For Mac
 alias grep='grep --color=auto'
 export MAILCHECK=0
 export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+export LSCOLORS=xbfxcxdxbxegedabagacad
 # 補完候補にも色付き表示
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # kill の候補にも色付き表示
@@ -26,10 +31,11 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([%0-9]#)*=0=01;31
 ##====================== 補完の設定 ======================##
 ##========================================================##
 autoload -U compinit ; compinit
+setopt correct  ## 入力しているコマンド名が間違っている場合にもしかして：を出す。
 setopt auto_menu             # 補完キー連打で順に補完候補を自動で補完
 setopt list_packed           # コンパクトに補完リストを表示
 # 補完関数の表示を強化する
-#zstyle ':completion:*' use-cache true        # 補完キャッシュ
+zstyle ':completion:*' use-cache true        # 補完キャッシュ
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' completer _expand _complete _match _prefix _approximate _list _history
 zstyle ':completion:*:messages' format '%F{YELLOW}%d'$DEFAULT
@@ -81,6 +87,7 @@ setopt pushd_ignore_dups     # ディレクトリスタックに重複する物�
 setopt pushd_to_home         # pushd 引数ナシ == pushd $HOME
 setopt pushd_silent          # pushd,popdの度にディレクトリスタックの中身を表示しない
 # pop command
+setopt interactive_comments  # コマンドラインでも # 以降をコメントと見なす
 alias pd='popd'
 alias gd='dirs -v; echo -n "select number: ";
 read newdir; cd +"$newdir" '
@@ -153,13 +160,25 @@ fi
 #        echo -ne "\ek${1%% *}\e\\"
 #}
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# ebenv にパスを設定
+# export PATH="$HOME/.rbenv/bin:$PATH"
+# eval "$(rbenv init -)"
 
-screen -d -R
+# screen が使いたい時
+# screen -d -R
 
-alias nqcp='sudo cp ~/bot/tkbmstest2.nq /usr/share/virtuoso-opensource-6.1/vad'
+# alias nqcp='sudo cp ~/bot/tkbmstest2.nq /usr/share/virtuoso-opensource-6.1/vad'
+
 alias e='emacs'
 
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+# export PATH="/usr/local/heroku/bin:$PATH"
+
+
+export PATH=$PATH:~/Library/Python/2.7/bin
+powerline-daemon -q
+. ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
+
+if [ $SHLVL = 1 ]; then
+  tmux attach || tmux -f $HOME/.tmux.conf
+fi
