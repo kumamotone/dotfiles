@@ -7,9 +7,13 @@
 "  https://github.com/ragiko/vimrc
 
 syntax on "シンタックスハイライト
-set nocompatible "vi互換ではなくVimのデフォルト設定にする
-set encoding=utf-8 "エンコード
-set fenc=utf-8
+"set nocompatible "vi互換ではなくVimのデフォルト設定にする
+"set encoding=utf-8 "エンコード
+"set fenc=utf-8:set encoding=utf-8
+set encoding=utf-8
+set termencoding=utf-8
+set fileencodings=utf-8,cp932
+set fileformats=mac,unix,dos
 set number "行番号を表示
 set ruler "右下位に表示される行・列の番号を表示する
 set clipboard+=unnamed
@@ -116,8 +120,6 @@ inoremap (<Enter> ()<Left><CR><BS><ESC><S-o>
 
 " Vimで入力補完を常にオンにするvimrc
 " http://io-fia.blogspot.jp/2012/11/vimvimrc.html
-
-set fileencodings=iso-2022-jp,cp932,sjis,euc-jp,utf-8
 
 augroup vimrcEx
   au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
