@@ -11,9 +11,10 @@ syntax on "シンタックスハイライト
 "set encoding=utf-8 "エンコード
 "set fenc=utf-8:set encoding=utf-8
 set encoding=utf-8
-set termencoding=utf-8
-set fileencodings=utf-8,cp932
-set fileformats=mac,unix,dos
+" set termencoding=utf-8
+" set fileencodings=utf-8,cp932
+" ✝✝軽い気持ちで以下を入れると死ぬ✝✝
+" set fileformats=mac,unix,dos
 set number "行番号を表示
 set ruler "右下位に表示される行・列の番号を表示する
 set clipboard+=unnamed

@@ -51,8 +51,8 @@ zstyle ':completion:*' group-name ''
 autoload -U predict-on       # 履歴による予測入力 (man zshcontrib)
 zle -N predict-on
 zle -N predict-off
-bindkey '^xp'  predict-on    # Cttl+x p で予測オン
-bindkey '^x^p' predict-off   # Cttl+x Ctrl+p で予測オフ
+bindkey '^xp'  predict-on    # Ctrl+x p で予測オン
+bindkey '^x^p' predict-off   # Ctrl+x Ctrl+p で予測オフ
 ##========================================================##
 ##====================== 履歴の設定 ======================##
 ##========================================================##
@@ -174,10 +174,13 @@ alias e='emacs'
 # export PATH="/usr/local/heroku/bin:$PATH"
 
 
-export PATH=$PATH:~/Library/Python/2.7/bin
-powerline-daemon -q
-. ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
+# export PATH=$PATH:~/Library/Python/2.7/bin
+# powerline-daemon -q
+# . ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
 
-if [ $SHLVL = 1 ]; then
-  tmux attach || tmux -f $HOME/.tmux.conf
-fi
+#if [ $SHLVL = 1 ]; then
+#  tmux attach || tmux -f $HOME/.tmux.conf
+#fi
+
+alias mysv='ssh kumamoto@kde.cs.tsukuba.ac.jp -t "ssh kumamoto@130.158.76.30"'
+alias pubsv='ssh kumamoto@kde.cs.tsukuba.ac.jp -t "ssh kumamoto@130.158.76.22"'
