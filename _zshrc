@@ -165,6 +165,13 @@ alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
    zstyle ':completion:*' completer _oldlist _complete
  fi
 
+### screen の設定 ### 
+# シェルレベル１の時にのみscreenコマンド叩く(多重起動防止)
+if [ $SHLVL = 1 ];then
+  screen -d -R
+fi
+
+
 # Acroread の Completion が遅い問題を回避
 #_acroread_version='7.0.9'
 #alias close='screen -D'
@@ -177,9 +184,6 @@ alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 # ebenv にパスを設定
 # export PATH="$HOME/.rbenv/bin:$PATH"
 # eval "$(rbenv init -)"
-
-# screen が使いたい時
-screen -d -R
 
 ### Added by the Heroku Toolbelt
 # export PATH="/usr/local/heroku/bin:$PATH"
