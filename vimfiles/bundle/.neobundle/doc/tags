@@ -235,6 +235,8 @@ g:indentLine_color_gui	indentLine.txt	/*g:indentLine_color_gui*
 g:indentLine_color_term	indentLine.txt	/*g:indentLine_color_term*
 g:indentLine_color_tty_dark	indentLine.txt	/*g:indentLine_color_tty_dark*
 g:indentLine_color_tty_light	indentLine.txt	/*g:indentLine_color_tty_light*
+g:indentLine_concealcursor	indentLine.txt	/*g:indentLine_concealcursor*
+g:indentLine_conceallevel	indentLine.txt	/*g:indentLine_conceallevel*
 g:indentLine_enabled	indentLine.txt	/*g:indentLine_enabled*
 g:indentLine_faster	indentLine.txt	/*g:indentLine_faster*
 g:indentLine_fileType	indentLine.txt	/*g:indentLine_fileType*
@@ -244,7 +246,6 @@ g:indentLine_indentLevel	indentLine.txt	/*g:indentLine_indentLevel*
 g:indentLine_leadingSpaceChar	indentLine.txt	/*g:indentLine_leadingSpaceChar*
 g:indentLine_leadingSpaceEnabled	indentLine.txt	/*g:indentLine_leadingSpaceEnabled*
 g:indentLine_maxLines	indentLine.txt	/*g:indentLine_maxLines*
-g:indentLine_noConcealCursor	indentLine.txt	/*g:indentLine_noConcealCursor*
 g:indentLine_showFirstIndentLevel	indentLine.txt	/*g:indentLine_showFirstIndentLevel*
 g:lightline	lightline.txt	/*g:lightline*
 g:lightline.active	lightline.txt	/*g:lightline.active*
@@ -453,15 +454,12 @@ g:unite_source_grep_default_opts	unite.txt	/*g:unite_source_grep_default_opts*
 g:unite_source_grep_encoding	unite.txt	/*g:unite_source_grep_encoding*
 g:unite_source_grep_recursive_opt	unite.txt	/*g:unite_source_grep_recursive_opt*
 g:unite_source_grep_search_word_highlight	unite.txt	/*g:unite_source_grep_search_word_highlight*
-g:unite_source_history_save_clipboard	unite.txt	/*g:unite_source_history_save_clipboard*
-g:unite_source_history_yank_enable	unite.txt	/*g:unite_source_history_yank_enable*
-g:unite_source_history_yank_file	unite.txt	/*g:unite_source_history_yank_file*
-g:unite_source_history_yank_limit	unite.txt	/*g:unite_source_history_yank_limit*
 g:unite_source_line_enable_highlight	unite.txt	/*g:unite_source_line_enable_highlight*
 g:unite_source_menu_menus	unite.txt	/*g:unite_source_menu_menus*
 g:unite_source_mru_do_validate	neomru.txt	/*g:unite_source_mru_do_validate*
 g:unite_source_mru_update_interval	neomru.txt	/*g:unite_source_mru_update_interval*
 g:unite_source_neobundle_install_max_processes	neobundle.txt	/*g:unite_source_neobundle_install_max_processes*
+g:unite_source_output_shellcmd_colors	unite.txt	/*g:unite_source_output_shellcmd_colors*
 g:unite_source_process_enable_confirm	unite.txt	/*g:unite_source_process_enable_confirm*
 g:unite_source_rec_async_command	unite.txt	/*g:unite_source_rec_async_command*
 g:unite_source_rec_find_args	unite.txt	/*g:unite_source_rec_find_args*
@@ -522,7 +520,6 @@ i_<Plug>(unite_move_head)	unite.txt	/*i_<Plug>(unite_move_head)*
 i_<Plug>(unite_move_left)	unite.txt	/*i_<Plug>(unite_move_left)*
 i_<Plug>(unite_move_right)	unite.txt	/*i_<Plug>(unite_move_right)*
 i_<Plug>(unite_narrowing_input_history)	unite.txt	/*i_<Plug>(unite_narrowing_input_history)*
-i_<Plug>(unite_narrowing_path)	unite.txt	/*i_<Plug>(unite_narrowing_path)*
 i_<Plug>(unite_new_candidate)	unite.txt	/*i_<Plug>(unite_new_candidate)*
 i_<Plug>(unite_print_candidate)	unite.txt	/*i_<Plug>(unite_print_candidate)*
 i_<Plug>(unite_print_message_log)	unite.txt	/*i_<Plug>(unite_print_message_log)*
@@ -661,7 +658,6 @@ neobundle-options-name	neobundle.txt	/*neobundle-options-name*
 neobundle-options-overwrite	neobundle.txt	/*neobundle-options-overwrite*
 neobundle-options-recipe	neobundle.txt	/*neobundle-options-recipe*
 neobundle-options-regular_name	neobundle.txt	/*neobundle-options-regular_name*
-neobundle-options-resettable	neobundle.txt	/*neobundle-options-resettable*
 neobundle-options-rtp	neobundle.txt	/*neobundle-options-rtp*
 neobundle-options-script_type	neobundle.txt	/*neobundle-options-script_type*
 neobundle-options-site	neobundle.txt	/*neobundle-options-site*
@@ -982,6 +978,7 @@ unite-filter-attribute-filter	unite.txt	/*unite-filter-attribute-filter*
 unite-filter-attribute-name	unite.txt	/*unite-filter-attribute-name*
 unite-filter-attribute-pattern	unite.txt	/*unite-filter-attribute-pattern*
 unite-filter-attributes	unite.txt	/*unite-filter-attributes*
+unite-filter-converter_abbr_word	unite.txt	/*unite-filter-converter_abbr_word*
 unite-filter-converter_default	unite.txt	/*unite-filter-converter_default*
 unite-filter-converter_file_directory	unite.txt	/*unite-filter-converter_file_directory*
 unite-filter-converter_full_path	unite.txt	/*unite-filter-converter_full_path*
@@ -1007,6 +1004,7 @@ unite-filter-sorter_length	unite.txt	/*unite-filter-sorter_length*
 unite-filter-sorter_nothing	unite.txt	/*unite-filter-sorter_nothing*
 unite-filter-sorter_rank	unite.txt	/*unite-filter-sorter_rank*
 unite-filter-sorter_reverse	unite.txt	/*unite-filter-sorter_reverse*
+unite-filter-sorter_selecta	unite.txt	/*unite-filter-sorter_selecta*
 unite-filter-sorter_word	unite.txt	/*unite-filter-sorter_word*
 unite-filter-variables	unite.txt	/*unite-filter-variables*
 unite-filters	unite.txt	/*unite-filters*
@@ -1090,6 +1088,7 @@ unite-options-previewheight	unite.txt	/*unite-options-previewheight*
 unite-options-profile-name	unite.txt	/*unite-options-profile-name*
 unite-options-prompt	unite.txt	/*unite-options-prompt*
 unite-options-prompt-direction	unite.txt	/*unite-options-prompt-direction*
+unite-options-prompt-focus	unite.txt	/*unite-options-prompt-focus*
 unite-options-prompt-visible	unite.txt	/*unite-options-prompt-visible*
 unite-options-quick-match	unite.txt	/*unite-options-quick-match*
 unite-options-resume	unite.txt	/*unite-options-resume*
@@ -1133,7 +1132,6 @@ unite-source-attribute-hooks-on_post_filter	unite.txt	/*unite-source-attribute-h
 unite-source-attribute-hooks-on_pre_filter	unite.txt	/*unite-source-attribute-hooks-on_pre_filter*
 unite-source-attribute-hooks-on_pre_init	unite.txt	/*unite-source-attribute-hooks-on_pre_init*
 unite-source-attribute-hooks-on_syntax	unite.txt	/*unite-source-attribute-hooks-on_syntax*
-unite-source-attribute-is_grouped	unite.txt	/*unite-source-attribute-is_grouped*
 unite-source-attribute-is_listed	unite.txt	/*unite-source-attribute-is_listed*
 unite-source-attribute-is_volatile	unite.txt	/*unite-source-attribute-is_volatile*
 unite-source-attribute-matchers	unite.txt	/*unite-source-attribute-matchers*
@@ -1166,8 +1164,8 @@ unite-source-file_rec/neovim	unite.txt	/*unite-source-file_rec\/neovim*
 unite-source-find	unite.txt	/*unite-source-find*
 unite-source-function	unite.txt	/*unite-source-function*
 unite-source-grep	unite.txt	/*unite-source-grep*
+unite-source-grep-git	unite.txt	/*unite-source-grep-git*
 unite-source-history/unite	unite.txt	/*unite-source-history\/unite*
-unite-source-history/yank	unite.txt	/*unite-source-history\/yank*
 unite-source-jump	unite.txt	/*unite-source-jump*
 unite-source-jump_point	unite.txt	/*unite-source-jump_point*
 unite-source-launcher	unite.txt	/*unite-source-launcher*
@@ -1177,6 +1175,7 @@ unite-source-menu	unite.txt	/*unite-source-menu*
 unite-source-neomru/directory	neomru.txt	/*unite-source-neomru\/directory*
 unite-source-neomru/file	neomru.txt	/*unite-source-neomru\/file*
 unite-source-output	unite.txt	/*unite-source-output*
+unite-source-output/shellcmd	unite.txt	/*unite-source-output\/shellcmd*
 unite-source-process	unite.txt	/*unite-source-process*
 unite-source-register	unite.txt	/*unite-source-register*
 unite-source-runtimepath	unite.txt	/*unite-source-runtimepath*
@@ -1216,6 +1215,7 @@ vimfiler-create-source	vimfiler.txt	/*vimfiler-create-source*
 vimfiler-default-key-mappings	vimfiler.txt	/*vimfiler-default-key-mappings*
 vimfiler-deprecated-variables	vimfiler.txt	/*vimfiler-deprecated-variables*
 vimfiler-examples	vimfiler.txt	/*vimfiler-examples*
+vimfiler-extensions	vimfiler.txt	/*vimfiler-extensions*
 vimfiler-faq	vimfiler.txt	/*vimfiler-faq*
 vimfiler-filter-matcher_ignore_files	vimfiler.txt	/*vimfiler-filter-matcher_ignore_files*
 vimfiler-filter-matcher_ignore_pattern	vimfiler.txt	/*vimfiler-filter-matcher_ignore_pattern*
@@ -1239,6 +1239,7 @@ vimfiler-options-edit-action	vimfiler.txt	/*vimfiler-options-edit-action*
 vimfiler-options-explorer	vimfiler.txt	/*vimfiler-options-explorer*
 vimfiler-options-explorer-columns	vimfiler.txt	/*vimfiler-options-explorer-columns*
 vimfiler-options-find	vimfiler.txt	/*vimfiler-options-find*
+vimfiler-options-fnamewidth	vimfiler.txt	/*vimfiler-options-fnamewidth*
 vimfiler-options-force-hide	vimfiler.txt	/*vimfiler-options-force-hide*
 vimfiler-options-force-quit	vimfiler.txt	/*vimfiler-options-force-quit*
 vimfiler-options-horizontal	vimfiler.txt	/*vimfiler-options-horizontal*
