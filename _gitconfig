@@ -1,3 +1,13 @@
 [user]
   email = kumamotone@gmail.com
   name = Kazumasa KUMAMOTO<F29>
+[alias]
+  st = status
+  cm = commit
+  d = diff -C
+  df = diff
+  l = log
+  a = add
+  ap = add -p
+  co = checkout
+  sh = show
