@@ -21,8 +21,10 @@ alias ls='ls -G'
 # For Mac
 alias grep='grep --color=auto'
 export MAILCHECK=0
-export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-#export LSCOLORS=gxfxcxdxbxegedabagacad
+# For mac
+#export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+# For Linux
+export LSCOLORS=gxfxcxdxbxegedabagacad
 # 補完候補にも色付き表示
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # kill の候補にも色付き表示
@@ -115,6 +117,22 @@ if exists percol; then
     bindkey '^R' percol_select_history
 fi
 
+##========================================================##
+##====================== aliases    ======================##
+##========================================================##
+
+# alias nqcp='sudo cp ~/bot/tkbmstest2.nq /usr/share/virtuoso-opensource-6.1/vad'
+alias e='emacs'
+alias v='vim'
+alias g='git'
+
+alias mysv='ssh kumamoto@kde.cs.tsukuba.ac.jp -t "ssh kumamoto@130.158.76.30"'
+alias pubsv='ssh kumamoto@kde.cs.tsukuba.ac.jp -t "ssh kumamoto@130.158.76.22"'
+
+#
+# relogin
+alias relogin='exec $SHELL -l'
+
 # alias -s の力で あらゆる圧縮ファイルを
 # ~$ ./test.zip
 # ~$ ./test.tar.gz
@@ -136,10 +154,6 @@ function extract() {
 }
 alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 
-
-# 最ログインは relogin
-alias relogin='exec $SHELL -l'
-
 # auto-fu
  if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
    source ~/.zsh/auto-fu.zsh/auto-fu.zsh
@@ -160,19 +174,14 @@ alias relogin='exec $SHELL -l'
 #}
 
 # ebenv にパスを設定
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# export PATH="$HOME/.rbenv/bin:$PATH"
+# eval "$(rbenv init -)"
 
 # screen が使いたい時
-# screen -d -R
-
-# alias nqcp='sudo cp ~/bot/tkbmstest2.nq /usr/share/virtuoso-opensource-6.1/vad'
-
-alias e='emacs'
+screen -d -R
 
 ### Added by the Heroku Toolbelt
 # export PATH="/usr/local/heroku/bin:$PATH"
-
 
 # export PATH=$PATH:~/Library/Python/2.7/bin
 # powerline-daemon -q
@@ -181,6 +190,3 @@ alias e='emacs'
 #if [ $SHLVL = 1 ]; then
 #  tmux attach || tmux -f $HOME/.tmux.conf
 #fi
-
-alias mysv='ssh kumamoto@kde.cs.tsukuba.ac.jp -t "ssh kumamoto@130.158.76.30"'
-alias pubsv='ssh kumamoto@kde.cs.tsukuba.ac.jp -t "ssh kumamoto@130.158.76.22"'
