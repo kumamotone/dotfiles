@@ -112,7 +112,7 @@ alias e='emacs'
 alias v='vim'
 alias g='git'
 
-alias ll='ls -rtl'
+alias ll='ls -artlF'
 # Mac だとGオプション？
 # alias ll='ls -rtlG'
 alias la='ls -A'
@@ -125,7 +125,6 @@ alias mkdir='mkdir -p'
 alias mysv='ssh kumamoto@kde.cs.tsukuba.ac.jp -t "ssh kumamoto@130.158.76.30"'
 alias pubsv='ssh kumamoto@kde.cs.tsukuba.ac.jp -t "ssh kumamoto@130.158.76.22"'
 
-#
 # relogin
 alias relogin='exec $SHELL -l'
 
@@ -165,7 +164,6 @@ alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 if [ $SHLVL = 1 ];then
   screen -d -R
 fi
-
 
 # Acroread の Completion が遅い問題を回避
 #_acroread_version='7.0.9'
