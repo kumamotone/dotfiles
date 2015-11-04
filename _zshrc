@@ -10,7 +10,11 @@ zcompile .zshrc
 #========================================================##
 ##================= リストの色つけの設定 =================##
 ##========================================================##
-# ls等でカラー表示にする
+# ls等でカラー表示にする(Macの設定 Ubuntuの場合 以下のif文内で上書きされる)
+alias ls='ls -G'
+# Mac は LS_COLORS, Ubuntu等は LSCOLORS
+export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+export LSCOLORS=gxfxcxdxbxegedabagacad
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
@@ -21,10 +25,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
-# For mac
-# export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-# For Linux
-export LSCOLORS=gxfxcxdxbxegedabagacad
 # 補完候補にも色付き表示
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # kill の候補にも色付き表示
@@ -161,9 +161,9 @@ alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 
 ### screen の設定 ### 
 # シェルレベル１の時にのみscreenコマンド叩く(多重起動防止)
-if [ $SHLVL = 1 ];then
-  screen -d -R
-fi
+#if [ $SHLVL = 1 ];then
+#  screen -d -R
+#fi
 
 # Acroread の Completion が遅い問題を回避
 #_acroread_version='7.0.9'
