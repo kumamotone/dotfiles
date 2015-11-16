@@ -161,9 +161,20 @@ alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 
 ### screen の設定 ### 
 # シェルレベル１の時にのみscreenコマンド叩く(多重起動防止)
-#if [ $SHLVL = 1 ];then
-#  screen -d -R
-#fi
+if [ $SHLVL = 1 ];then
+  screen -d -R
+fi
+
+# zsh でウィンドウ名に ホスト名とコマンド名を表示する
+
+preexec() {
+    mycmd=(${(s: :)${1}})
+    echo -ne "\ek$(hostname|awk 'BEGIN{FS="."}{print $1}'):$mycmd[1]\e\\"
+}
+
+precmd() {
+    echo -ne "\ek$(hostname|awk 'BEGIN{FS="."}{print $1}'):idle\e\\"
+}
 
 # Acroread の Completion が遅い問題を回避
 #_acroread_version='7.0.9'
