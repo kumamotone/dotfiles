@@ -1,7 +1,11 @@
 escape ^t^t
 
-hardstatus alwayslastline "%{= wg} %-w%{=bu dr}%n %t%{-}%+w %= %{=b kw} %Y/%m/%d %0c"
 sorendition "+rb .G"
 
 defscrollback 10000
-termcapinfo xterm* ti@:te@
+
+termcapinfo xterm* ti@te@
+# termcapinfo xterm* 'hs:ts=\E]0;:fs=\007:ds=\E]0;\007'
+
+defhstatus "^Et"
+caption always "%{= wg} %-w%{=bu dr}%n %t%{-}%+w %= %{=b kw} %Y/%m/%d %0c"
