@@ -16,9 +16,13 @@ set encoding=utf-8
 " ✝✝軽い気持ちで以下を入れると死ぬ✝✝
 " set fileformats=mac,unix,dos
 set number "行番号を表示
+" OS のクリップボードを使う
+if has('unnamedplus')
+    set clipboard& clipboard+=unnamedplus
+else
+    set clipboard& clipboard+=unnamed,autoselect
+endif 
 set ruler "右下位に表示される行・列の番号を表示する
-set clipboard+=unnamed
-set clipboard=unnamed "OSのクリップボードを使う
 set matchtime=3 "の表示秒数を3秒に
 set wrap "ウィンドウの幅より長い行は折り返され，次の行に続けて表示される
 set ignorecase " 小文字の検索でも大文字も見つかるようにする
@@ -59,11 +63,6 @@ nnoremap <C-l> <C-w>l
 " ?{pattern}の入力中は「?」をタイプすると自動で「\?」が 入力されるようになる
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
-if has('unnamedplus')
-    set clipboard& clipboard+=unnamedplus
-else
-    set clipboard& clipboard+=unnamed,autoselect
-endif 
 
 " スペースw,q,Qで保存，終了処理
 nnoremap <Space>w  :<C-u>w<CR>
@@ -119,6 +118,10 @@ inoremap {<Enter> {}<Left><CR><BS><ESC><S-o>
 inoremap [<Enter> []<Left><CR><BS><ESC><S-o>
 inoremap (<Enter> ()<Left><CR><BS><ESC><S-o>
 
+
+" JSON のダブルクォーテーションを自動で消してくれる機能を無効化
+let g:vim_json_syntax_conceal = 0
+
 " Vimで入力補完を常にオンにするvimrc
 " http://io-fia.blogspot.jp/2012/11/vimvimrc.html
 
@@ -167,7 +170,9 @@ NeoBundle 'Yggdroot/indentLine' " インデントを見やすく
 NeoBundle 'tpope/vim-endwise' " Ruby向けにendを自動挿入してくれる 
 NeoBundle 'tomtom/tcomment_vim' " コメントON/OFFを手軽に実行
 NeoBundle 'ConradIrwin/vim-bracketed-paste' " paste mode 自動化
- " My Bundles here:
+NeoBundle 'elzr/vim-json'
+
+" My Bundles here:
  " Refer to |:NeoBundle-examples|.
  " Note: You don't set neobundle setting in .gvimrc!
 
