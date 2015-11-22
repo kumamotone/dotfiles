@@ -129,6 +129,9 @@ alias pubsv='ssh kumamoto@kde.cs.tsukuba.ac.jp -t "ssh kumamoto@130.158.76.22"'
 # relogin
 alias relogin='exec $SHELL -l'
 
+# mac で vim の起動先が変わらないので力技でこうしている
+# alias vim='/usr/local/bin/vim'
+
 # alias -s の力で あらゆる圧縮ファイルを
 # ~$ ./test.zip
 # ~$ ./test.tar.gz
