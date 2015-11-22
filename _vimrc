@@ -15,7 +15,7 @@ set encoding=utf-8
 " set fileencodings=utf-8,cp932
 " ✝✝軽い気持ちで以下を入れると死ぬ✝✝
 " set fileformats=mac,unix,dos
-set number "行番号を表示
+" set number "行番号を表示
 " OS のクリップボードを使う
 if has('unnamedplus')
     set clipboard& clipboard+=unnamedplus
@@ -114,10 +114,9 @@ let g:rehash256 = 1
 set background=dark
 
 " Vimで括弧の補完→改行してインデント
-inoremap {<Enter> {}<Left><CR><BS><ESC><S-o>
-inoremap [<Enter> []<Left><CR><BS><ESC><S-o>
-inoremap (<Enter> ()<Left><CR><BS><ESC><S-o>
-
+"inoremap {<Enter> {}<Left><CR><BS><ESC><S-o>
+"inoremap [<Enter> []<Left><CR><BS><ESC><S-o>
+"inoremap (<Enter> ()<Left><CR><BS><ESC><S-o>
 
 " JSON のダブルクォーテーションを自動で消してくれる機能を無効化
 let g:vim_json_syntax_conceal = 0
@@ -160,10 +159,10 @@ imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
  " Required:
  NeoBundleFetch 'Shougo/neobundle.vim'
 
- NeoBundle 'Shougo/unite.vim' " ファイルオープンを便利に(VimFiler用)
- NeoBundle 'Shougo/vimfiler.vim' " ファイラ
- NeoBundle 'Shougo/neomru.vim' " Unite.vimで最近使ったファイルを表示できるようにする(VimFiler用)
- NeoBundle 'thinca/vim-quickrun' " :QuickRun でクイック実行
+NeoBundle 'Shougo/unite.vim' " ファイルオープンを便利に(VimFiler用)
+NeoBundle 'Shougo/vimfiler.vim' " ファイラ
+NeoBundle 'Shougo/neomru.vim' " Unite.vimで最近使ったファイルを表示できるようにする(VimFiler用)
+NeoBundle 'thinca/vim-quickrun' " :QuickRun でクイック実行
 NeoBundle 'Shougo/neocomplcache.vim' "入力補完機能を提供する Vim のプラグイン
 NeoBundle 'itchyny/lightline.vim' " Statuslineを豪華に
 NeoBundle 'Yggdroot/indentLine' " インデントを見やすく 
