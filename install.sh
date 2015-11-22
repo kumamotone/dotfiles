@@ -8,6 +8,7 @@ ln -s ~/dotfiles/_gitconfig ~/.gitconfig
 git clone git://github.com/Shougo/neobundle.vim ~/dotfiles/vimfiles/bundle/neobundle.vim
 
 # molokai 入れたい場合
+mkdir vimfiles
 git clone https://github.com/tomasr/molokai
 mv molokai/ vimfiles/
 mkdir vimfiles/colors
