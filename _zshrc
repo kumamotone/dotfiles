@@ -113,7 +113,7 @@ alias e='emacs'
 alias v='vim'
 alias g='git'
 
-alias ll='ls -artlF'
+alias ll='ls -artlFh'
 # Mac だとGオプション？
 # alias ll='ls -rtlG'
 alias la='ls -A'
