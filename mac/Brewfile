@@ -1,0 +1,31 @@
+# vim
+brew 'lua'
+cask 'xquartz'
+brew 'vim', args:['with-lua', 'with-perl', 'HEAD', 'override-system-vi']
+
+# Essential
+brew 'wget'
+brew 'jq'
+# cask 'google-chrome'
+# cask 'iterm2'
+cask 'google-japanese-ime'
+cask 'karabiner'
+brew 'fish'
+
+# iOS
+# cask 'realm-browser'
+brew 'swiftlint'
+brew 'carthage'
+
+brew 'rbenv'
+brew 'ruby-build'
+
+# Editors
+# cask 'atom'
+cask 'macdown'
+# cask 'kobito'
+
+# For Life 🐈
+cask 'bettertouchtool'
+# cask 'trailer'
+cask 'flux'

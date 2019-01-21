@@ -1,0 +1,174 @@
+--
+-- Hammerspoon用 KeyRemap 設定
+--
+
+local function keyCode(key, modifiers)
+   modifiers = modifiers or {}
+   return function()
+      hs.eventtap.event.newKeyEvent(modifiers, string.lower(key), true):post()
+      hs.timer.usleep(1000)
+      hs.eventtap.event.newKeyEvent(modifiers, string.lower(key), false):post()
+   end
+end
+
+local function remapKey(modifiers, key, keyCode)
+   hs.hotkey.bind(modifiers, key, keyCode, nil, keyCode)
+end
+
+local function disableAllHotkeys()
+   for k, v in pairs(hs.hotkey.getHotkeys()) do
+      v['_hk']:disable()
+   end
+end
+
+local function enableAllHotkeys()
+   for k, v in pairs(hs.hotkey.getHotkeys()) do
+      v['_hk']:enable()
+   end
+end
+
+local function handleGlobalAppEvent(name, event, app)
+   if event == hs.application.watcher.activated then
+      -- hs.alert.show(name)
+      if name ~= "iTerm2" then
+         enableAllHotkeys()
+      else
+         disableAllHotkeys()
+      end
+   end
+end
+
+appsWatcher = hs.application.watcher.new(handleGlobalAppEvent)
+appsWatcher:start()
+
+--
+-- ここから KeyRemap 設定
+--
+
+-- カーソル移動
+-- 現状 hs.hotkey.bind の挙動が怪しいので getFlags+getKeyCode を使うといい
+hs.eventtap.new({hs.eventtap.event.types.keyDown}, function(e)
+  -- Ctrl + Shift + FBNP（ctrl単体のものよりより先に書く必要がある）
+  if e:getFlags().ctrl and e:getFlags().shift then
+    if e:getKeyCode() == 35 then
+      hs.eventtap.event.newKeyEvent({"shift"}, "up", true):post(); return true;
+    elseif e:getKeyCode() == 11 then
+      hs.eventtap.event.newKeyEvent({"shift"}, "left", true):post(); return true;
+    elseif e:getKeyCode() == 45 then
+      hs.eventtap.event.newKeyEvent({"shift"}, "down", true):post(); return true;
+    elseif e:getKeyCode() == 3 then
+      hs.eventtap.event.newKeyEvent({"shift"}, "right", true):post(); return true;
+    elseif e:getKeyCode() == 6 then
+      hs.eventtap.event.newKeyEvent({'shift','cmd'}, 'z', true):post(); return true;
+    end
+  end
+
+  -- Ctrl + FBNP
+  if e:getFlags().ctrl then
+    -- log の吐き方
+    -- local log = hs.logger.new('mymodule','debug')
+    -- log.i(e:getKeyCode())
+    if e:getKeyCode() == 35 then
+      hs.eventtap.event.newKeyEvent({}, 'up', true):post(); return true;
+      elseif e:getKeyCode() == 11 then
+      hs.eventtap.event.newKeyEvent({}, 'left', true):post(); return true;
+    elseif e:getKeyCode() == 45 then
+      hs.eventtap.event.newKeyEvent({}, 'down', true):post(); return true;
+    elseif e:getKeyCode() == 3 then
+      hs.eventtap.event.newKeyEvent({}, 'right', true):post(); return true;
+    -- PCライクなバインディング、たとえば
+    -- ctrl + W を cmd + W にするのも hs.hotkey.bind だと何故か出来ないので
+    -- こっちの方法を使っている
+    -- elseif e:getKeyCode() == 6 then
+    --   hs.eventtap.event.newKeyEvent({'cmd'}, 'z', true):post(); return true;
+    -- elseif e:getKeyCode() == 7 then
+    --   hs.eventtap.event.newKeyEvent({'cmd'}, 'x', true):post(); return true;
+    -- elseif e:getKeyCode() == 8 then
+    --   hs.eventtap.event.newKeyEvent({'cmd'}, 'c', true):post(); return true;
+    -- elseif e:getKeyCode() == 9 then
+    --   hs.eventtap.event.newKeyEvent({'cmd'}, 'v', true):post(); return true;
+    -- elseif e:getKeyCode() == 13 then
+    --   hs.eventtap.event.newKeyEvent({'cmd'}, 'w', true):post(); return true;
+    -- elseif e:getKeyCode() == 46 then
+      -- hs.eventtap.event.newKeyEvent({}, 'return', true):post(); return true;
+      -- hs.eventtap.keyStroke({}, 'return');
+    end
+  end
+
+  return false
+end):start()
+
+-- 行頭行末移動
+-- home/end は 行頭ではなく、Move to beginning of text (インデントを考慮して行頭) になってほしい
+remapKey({"ctrl"}, "a", keyCode("left", {"cmd"}))
+remapKey({"ctrl"}, "e", keyCode("right", {"cmd"}))
+
+remapKey({"alt"}, "b", keyCode("left", {"alt"}))
+remapKey({"alt"}, "f", keyCode("right", {"alt"}))
+remapKey({"alt"}, "n", keyCode("down", {"alt"}))
+remapKey({"alt"}, "p", keyCode("up", {"alt"}))
+
+remapKey({"alt", "shift"}, "b", keyCode("left", {"alt", "shift"}))
+remapKey({"alt", "shift"}, "f", keyCode("right", {"alt", "shift"}))
+remapKey({"alt", "shift"}, "n", keyCode("down", {"alt", "shift"}))
+remapKey({"alt", "shift"}, "p", keyCode("up", {"alt", "shift"}))
+
+remapKey({"alt"}, "h", keyCode('delete', {"alt"}))
+local function deleteWordForward()
+  keyCode('right', {'shift', 'alt'})()
+  keyCode('delete')()
+end
+remapKey({'alt'}, 'd', deleteWordForward)
+
+-- Return
+remapKey({'ctrl'}, 'm', keyCode('return'))
+
+-- Delete
+-- Ctrl+H を文字編集以外（ブラウザバック）でも使いたいため
+remapKey({'ctrl'}, 'h', keyCode('delete'))
+
+-- Ctrl+K は OS 標準のものを使用
+-- Office だと効かない 悔しい
+
+-- ページスクロール
+remapKey({'ctrl'}, 'v', keyCode('pagedown'))
+remapKey({'alt'}, 'v', keyCode('pageup'))
+
+-- Esc
+-- remapKey({'ctrl'}, 'g', keyCode('escape'))
+
+--
+-- 参考
+--
+
+-- 【テンプレ】
+-- Karabiner 使えない対策: Hammerspoon で macOS の修飾キーつきホットキーのキーリマップを実現する - Qiita
+-- http://qiita.com/naoya@github/items/81027083aeb70b309c14
+
+-- 【行頭、行末移動】
+-- Sierra+Hammerspoonでキーバインドを設定する - たまめも(tech)
+-- http://tamamemo.hatenablog.com/entry/2017/01/30/183650
+
+-- 【hotkey.bind の代替】
+-- 2ch
+-- https://potato.2ch.net/test/read.cgi/mac/1485327943/#217
+
+-- 【困った時】
+-- Hammerspoon docs
+-- http://www.hammerspoon.org/docs/index.html
+
+-- 【Ctrl+K （使わなかった）】
+-- http://qiita.com/swdyh/items/04f7da8c1209a067add5
+local function killLine()
+  keyCode('e', {'shift', 'ctrl'})()
+  keyCode('x', {'cmd'})()
+end
+remapKey({'ctrl'}, 'u', killLine)
+
+local function yank()
+  keyCode('e', {'shift', 'ctrl'})()
+  keyCode('c', {'cmd'})()
+  keyCode('right')()
+end
+remapKey({'ctrl'}, 'y', yank)
+-- remapKey({"ctrl"}, "y", keyCode("v", {"cmd"}))

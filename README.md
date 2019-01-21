@@ -35,3 +35,11 @@ zsh と percol を使うのでインストール＋chshしてする．
 ```
 
 screen を有効にする場合は zshrc 内の screen の自動起動設定を使用できる．
+
+## fish
+
+2019年現在 mac で使っている。 config は以下のパスに置く。
+
+```
+~/.config/fish/config.fish
+```
