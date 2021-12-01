@@ -165,9 +165,9 @@ alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 
 ### screen の設定 ### 
 # シェルレベル１の時にのみscreenコマンド叩く(多重起動防止)
-if [ $SHLVL = 1 ];then
-  screen -d -R
-fi
+# if [ $SHLVL = 1 ];then
+  # screen -d -R
+# fi
 
 # zsh でウィンドウ名に ホスト名とコマンド名を表示する
 

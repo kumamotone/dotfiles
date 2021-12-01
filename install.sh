@@ -14,9 +14,18 @@ mkdir vimfiles/colors
 mv vimfiles/molokai/colors/molokai.vim vimfiles/colors/
 ln -s ~/dotfiles/vimfiles ~/.vim
 
-# percol
-# curl -kL https://raw.github.com/pypa/pip/master/contrib/get-pip.py | sudo python
-# sudo pip install percol
+brew install fish
+sudo cat /usr/local/bin/fish >> /etc/shells
+chsh -s /usr/local/bin/fish
 
-# change shell
-# chsh -s /usr/bin/zsh
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+omf install peco
+brew install peco
+
+brew install cocoapods
+brew install rbenv
+
+brew install cask
+brew install iterm2 --cask
+brew install google-japanese-ime --cask
+brew install visual-studio-code --cask

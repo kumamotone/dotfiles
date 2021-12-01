@@ -9,9 +9,11 @@ end
 export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 export LSCOLORS=gxfxcxdxbxegedabagacad
 
-set PATH /Users/kakumamo/Library/Android/sdk/tools $PATH
-set PATH /Users/kakumamo/Library/Android/sdk/platform-tools $PATH
-set -x PATH "/Users/kakumamo/.pyenv/bin" $PATH
+set PATH ~/Library/Android/sdk/tools $PATH
+set PATH ~/Library/Android/sdk/platform-tools $PATH
+set PATH ~/.pyenv/bin $PATH
+set PATH "/usr/local/bin/" $PATH
+set PATH ~/flutter/bin $PATH
 
 set PATH /usr/local/share/git-core/contrib/diff-highlight $PATH
 
