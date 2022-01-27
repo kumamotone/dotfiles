@@ -1,3 +1,10 @@
+# for M1
+set -g -x PATH $PATH /opt/homebrew/bin
+source /opt/homebrew/opt/asdf/libexec/asdf.fish
+
+# ignore greeting
+set fish_greeting
+
 # peco
 function fish_user_key_bindings
     bind \cr peco_select_history
@@ -17,8 +24,8 @@ set PATH ~/flutter/bin $PATH
 
 set PATH /usr/local/share/git-core/contrib/diff-highlight $PATH
 
-rbenv init - --no-rehash | source
-. (pyenv init - --no-rehash | psub)
+#rbenv init - --no-rehash | source
+#. (pyenv init - --no-rehash | psub)
 
 set HISTSIZE 1000000
 set SAVEHIST 1000000
@@ -36,4 +43,10 @@ alias gg='ghq get'
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [ -f /Users/kakumamo/your-name/node_modules/tabtab/.completions/sls.fish ]; and . /Users/kakumamo/your-name/node_modules/tabtab/.completions/sls.fish
 
-source ~/.iterm2_shell_integration.(basename $SHELL)
+# iterm
+# source ~/.iterm2_shell_integration.(basename $SHELL)
+
+#set -x GOENV_ROOT $HOME/.goenv
+#set -x PATH $GOENV_ROOT/bin $PATH
+#eval (goenv init - | source)
+#set -x PATH $GOPATH/bin $PATH
