@@ -6,7 +6,7 @@
 " Ragiko氏のvimrc
 "  https://github.com/ragiko/vimrc
 
-syntax on "シンタックスハイライト
+syntax on "syntax highlight
 "set nocompatible "vi互換ではなくVimのデフォルト設定にする
 "set encoding=utf-8 "エンコード
 "set fenc=utf-8:set encoding=utf-8
@@ -295,6 +295,9 @@ endfunction
 function! MyMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
+
+"保存時にsudo権限で無理やり保存
+cnoremap w!! w !sudo tee > /dev/null %<CR> :e!<CR>
 
 "-----------------------------------------------------------------------------
 "
