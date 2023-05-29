@@ -50,3 +50,5 @@ alias gg='ghq get'
 #set -x PATH $GOENV_ROOT/bin $PATH
 #eval (goenv init - | source)
 #set -x PATH $GOPATH/bin $PATH
+
+echo -e "\nsource "(brew --prefix asdf)"/asdf.fish"
