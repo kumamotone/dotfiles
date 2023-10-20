@@ -1,6 +1,6 @@
 # for M1
 set -g -x PATH $PATH /opt/homebrew/bin
-source /opt/homebrew/opt/asdf/libexec/asdf.fish
+# source /opt/homebrew/opt/asdf/libexec/asdf.fish
 
 # ignore greeting
 set fish_greeting
@@ -20,8 +20,8 @@ set PATH ~/Library/Android/sdk/tools $PATH
 set PATH ~/Library/Android/sdk/platform-tools $PATH
 set PATH ~/.pyenv/bin $PATH
 set PATH "/usr/local/bin/" $PATH
-set PATH ~/flutter/bin $PATH
-
+# set PATH ~/flutter/bin $PATH
+set PATH ~/.pub-cache/bin $PATH
 set PATH /usr/local/share/git-core/contrib/diff-highlight $PATH
 
 #rbenv init - --no-rehash | source
@@ -51,4 +51,4 @@ alias gg='ghq get'
 #eval (goenv init - | source)
 #set -x PATH $GOPATH/bin $PATH
 
-echo -e "\nsource "(brew --prefix asdf)"/asdf.fish"
+source /opt/homebrew/opt/asdf/libexec/asdf.fish

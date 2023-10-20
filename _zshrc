@@ -1,12 +1,10 @@
-# Gehirn RS2という格安で使える技術者向けレンタルサーバを使って，zshに目覚め，
-# この.zshrcはGehirn RS2にプリインストールされている.zshrcをベースに書いています．
-# とても良いサービスだと思うので，興味のある方はぜひ使ってみてください．
-# http://www.gehirn.jp/rs2.html
-# auto-fuはここを参考にして動くようになったヨ
-# http://succi.jp/blog/?p=901&utm_source=dlvr.it&utm_medium=twitter&utm_campaign=post-901
-
 # .zshrc をコンパイルして .zshrc.zwc を生成するコマンド
-zcompile .zshrc
+if [ ~/.zshrc -nt ~/.zshrc.zwc ]; then
+  zcompile ~/.zshrc
+fi
+
+[ ! -f ~/.hushlogin ] && touch ~/.hushlogin
+
 #========================================================##
 ##================= リストの色つけの設定 =================##
 ##========================================================##
@@ -32,7 +30,7 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([%0-9]#)*=0=01;31
 ###========================================================##
 ##====================== 補完の設定 ======================##
 ##========================================================##
-autoload -U compinit ; compinit
+autoload -Uz compinit && compinit
 setopt correct  ## 入力しているコマンド名が間違っている場合にもしかして：を出す。
 setopt auto_menu             # 補完キー連打で順に補完候補を自動で補完
 setopt list_packed           # コンパクトに補完リストを表示
@@ -74,8 +72,8 @@ PROMPT="%{$reset_color%}$ "
 # [場所] プロンプト
 PROMPT="%{$reset_color%}[%{$fg[red]%}%B%~%b%{$reset_color%}]$PROMPT"
 # 名前@マシン名 プロンプト
-PROMPT="%{$reset_color%}%{$fg[green]%}$USER%{$reset_color%}@%{$fg[cyan]%}%m%{$reset_color%}$PROMPT"
-RPROMPT="%{$fg[green]%}[%*]%{$reset_color%}"
+# PROMPT="%{$reset_color%}%{$fg[green]%}$USER%{$reset_color%}@%{$fg[cyan]%}%m%{$reset_color%}$PROMPT"
+# RPROMPT="%{$fg[green]%}[%*]%{$reset_color%}"
 ##========================================================##
 ##================ ディレクトリ移動の設定 ================##
 ##========================================================##
@@ -87,28 +85,21 @@ setopt interactive_comments  # コマンドラインでも # 以降をコメン�
 setopt no_beep               # コマンド入力エラーでBeepを鳴らさない
 setopt extended_glob
 
-### percol用 ###
+### peco用 ###
 
-function exists { which $1 &> /dev/null }
-exists
-if exists percol; then
-    function percol_select_history() {
-        local tac
-        exists gtac && tac="gtac" || { exists tac && tac="tac" || { tac="tail -r" } }
-        BUFFER=$(fc -l -n 1 | eval $tac | percol --query "$LBUFFER")
-        CURSOR=$#BUFFER         # move cursor
-        zle -R -c               # refresh
-    }
+function peco-history-selection() {
+    BUFFER=`history -n 1 | tac  | awk '!a[$0]++' | peco`
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
 
-    zle -N percol_select_history
-    bindkey '^R' percol_select_history
-fi
+zle -N peco-history-selection
+bindkey '^R' peco-history-selection
 
 ##========================================================##
 ##====================== エイリアスの設定 ================##
 ##========================================================##
 
-# alias nqcp='sudo cp ~/bot/tkbmstest2.nq /usr/share/virtuoso-opensource-6.1/vad'
 alias e='emacs'
 alias v='vim'
 alias g='git'
@@ -122,15 +113,6 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
-
-alias mysv='ssh kumamoto@kde.cs.tsukuba.ac.jp -t "ssh kumamoto@130.158.76.30"'
-alias pubsv='ssh kumamoto@kde.cs.tsukuba.ac.jp -t "ssh kumamoto@130.158.76.22"'
-
-# relogin
-alias relogin='exec $SHELL -l'
-
-# mac で vim の起動先が変わらないので力技でこうしている
-# alias vim='/usr/local/bin/vim'
 
 # alias -s の力で あらゆる圧縮ファイルを
 # ~$ ./test.zip
@@ -153,16 +135,6 @@ function extract() {
 }
 alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 
-# auto-fu
- if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
-   source ~/.zsh/auto-fu.zsh/auto-fu.zsh
-   function zle-line-init() {
-     auto-fu-init
-   }
-   zle -N zle-line-init
-   zstyle ':completion:*' completer _oldlist _complete
- fi
-
 ### screen の設定 ### 
 # シェルレベル１の時にのみscreenコマンド叩く(多重起動防止)
 # if [ $SHLVL = 1 ];then
@@ -170,7 +142,6 @@ alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 # fi
 
 # zsh でウィンドウ名に ホスト名とコマンド名を表示する
-
 preexec() {
     mycmd=(${(s: :)${1}})
     echo -ne "\ek$(hostname|awk 'BEGIN{FS="."}{print $1}'):$mycmd[1]\e\\"
@@ -180,28 +151,6 @@ precmd() {
     echo -ne "\ek$(hostname|awk 'BEGIN{FS="."}{print $1}'):idle\e\\"
 }
 
-# Acroread の Completion が遅い問題を回避
-#_acroread_version='7.0.9'
-#alias close='screen -D'
-#cd ~
-#export LANG=en_US.UTF-8
-#preexec () {
-#        echo -ne "\ek${1%% *}\e\\"
-#}
-
-# ebenv にパスを設定
-# export PATH="$HOME/.rbenv/bin:$PATH"
-# eval "$(rbenv init -)"
-
-### Added by the Heroku Toolbelt
-# export PATH="/usr/local/heroku/bin:$PATH"
-
-# export PATH=$PATH:~/Library/Python/2.7/bin
-# powerline-daemon -q
-# . ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
-
 #if [ $SHLVL = 1 ]; then
 #  tmux attach || tmux -f $HOME/.tmux.conf
 #fi
--e 
-. /opt/homebrew/opt/asdf/asdf.sh
